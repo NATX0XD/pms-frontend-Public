@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --colorPrimary: rgb(25, 111, 61);
+  --colorBgBase: rgb(244, 244, 244);
+  --primaryGradientStart: rgb(25, 111, 61);
+  --primaryGradientMiddle: rgb(40, 150, 86);
+  --primaryGradientEnd: rgb(79, 221, 138);
+}
+
+body {
+  background-color: var(--colorBgBase);
+  font-family: "MiSansThai", sans-serif;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
