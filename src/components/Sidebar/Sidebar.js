@@ -1,76 +1,145 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Card, CardBody, Switch, Link } from "@heroui/react";
-import { FaChevronLeft, FaChevronRight, FaChevronDown, FaChevronUp, FaSearch, FaMoon, FaSun, FaSignOutAlt } from 'react-icons/fa';
-import { useTheme } from "next-themes";
+import React, { useState } from "react";
+import Link from "next/link";
+import { Button } from "@heroui/react";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaChevronDown,
+  FaChevronUp,
+  FaSearch,
+  FaMoon,
+  FaSun,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import { TbMenuDeep } from "react-icons/tb";
+
+import clsx from "clsx";
 import { Navigation } from "@/configurations/navigation/Navigation";
+import { useSettings } from "@/hooks/useSettings";
+import { usePathname } from "next/navigation";
+import { IoMdMenu } from "react-icons/io";
 
-const Sidebar = () => {
-    const [openMenus, setOpenMenus] = useState({});
-    const [collapsed, setCollapsed] = useState(false);
-    
-    return (
-        <Card className={`${collapsed ? 'w-20' : 'w-64'} h-full rounded-none border-r transition-all duration-300`}>
-            <CardBody className="p-0 flex flex-col h-full">
-                <div className="p-4 flex items-center justify-between border-b">
-                    {!collapsed && <span className="font-bold">CJM Logistic</span>}
-                    <Button isIconOnly variant="light" onPress={() => setCollapsed(!collapsed)}>
-                        {collapsed ? <FaChevronRight size={16} /> : <FaChevronLeft size={16} />}
-                    </Button>
-                </div>
-                
-                <div className="flex-grow px-4 py-2 overflow-y-auto">
-                    {Navigation.map((item, index) => (
-                        <div key={index}>
-                            <Button
-                                as={Link}
-                                to={item.url}
-                                variant="light"
-                                className="w-full mb-2 justify-start hover:bg-gray-100 dark:hover:bg-gray-700"
-                                startContent={item.icon}
-                                endContent={item.children && !collapsed ? (openMenus[index] ? <FaChevronUp size={14} /> : <FaChevronDown size={14} />) : null}
-                                onPress={() => item.children && setOpenMenus(prev => ({ ...prev, [index]: !prev[index] }))}
-                            >
-                                {!collapsed && <span>{item.title}</span>}
-                            </Button>
+const Sidebar = ({ isMobile }) => {
+  const [openMenus, setOpenMenus] = useState({});
+  const { settings, saveSettings } = useSettings();
+  const pathname = usePathname();
+  const toggleSubMenu = (title) => {
+    setOpenMenus((prev) => ({ ...prev, [title]: !prev[title] }));
+  };
+  const handleCollapsed = () => {
+    saveSettings({
+      ...settings,
+      navigationCollapse: !settings.navigationCollapse,
+    });
+  };
+  const isCollapsed = settings.navigationCollapse;
+  return (
+    <aside
+      className={clsx(
+        "h-full bg-white dark:bg-background shadow-md transition-all duration-300",
+        isMobile ? "w-full" : isCollapsed ? "w-[80px]" : "w-[250px]"
+      )}
+    >
+      <div
+        className={clsx(
+          "flex items-center p-4 ",
+          isCollapsed ? "justify-center" : "justify-between"
+        )}
+      >
+        <span
+          className={clsx(
+            "text-xl font-bold bg-gradient-to-r from-[var(--primaryGradientStart)] via-[var(--primaryGradientMiddle)] to-[var(--primaryGradientEnd)] bg-clip-text text-transparent",
+            {
+              hidden: isCollapsed,
+            }
+          )}
+        >
+          {process.env.NEXT_PUBLIC_APP_NAME}
+        </span>
 
-                            {item.children && openMenus[index] && !collapsed && (
-                                <div className="pl-4 space-y-1 mb-2">
-                                    {item.children.map((child, childIndex) => (
-                                        <Button
-                                            key={childIndex}
-                                            as={Link}
-                                            to={child.url}
-                                            variant="light"
-                                            size="sm"
-                                            className="w-full justify-start text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
-                                            startContent={child.icon}
-                                        >
-                                            {child.title}
-                                        </Button>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
+        {!isMobile && (
+          <Button
+            isIconOnly
+            size={"md"}
+            variant="light"
+            onPress={handleCollapsed}
+            fullWidth
+          >
+            {isCollapsed ? (
+              <IoMdMenu className="text-lg" />
+            ) : (
+              <TbMenuDeep className="text-lg" />
+            )}
+          </Button>
+        )}
+      </div>
 
-                <div className="p-4 border-t mt-auto">
-                    <div className="flex gap-2">
-                        <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" size="sm" />
-                        {!collapsed && (
-                            <div className="flex flex-col">
-                                <span className="text-sm font-medium">ณัฐวุฒิ ธนกุล</span>
-                                <span className="text-xs text-gray-500">Web Designer</span>
-                            </div>
+      <nav className="px-2 py-4 space-y-3">
+        {Navigation.map((item) => {
+          const isActive = pathname === item.url;
+          return (
+            <div key={item.title}>
+              <Button
+                as={Link}
+                href={item.url}
+                onPress={() => {
+                  if (item.children) toggleSubMenu(item.title);
+                }}
+                fullWidth
+                size={isCollapsed ? "sm" : "md"}
+                variant={isActive ? "solid" : "light"}
+                className={clsx(
+                  "justify-start gap-3 px-3 py-2 text-left transition-colors ",
+                  isCollapsed && "justify-center",
+                  isActive &&
+                    "bg-gradient-to-r from-[var(--primaryGradientStart)] via-[var(--primaryGradientMiddle)] to-[var(--primaryGradientEnd)] text-white"
+                )}
+                endContent={
+                  item.children && !isCollapsed ? (
+                    openMenus[item.title] ? (
+                      <FaChevronUp size={14} />
+                    ) : (
+                      <FaChevronDown size={14} />
+                    )
+                  ) : null
+                }
+              >
+                <>
+                  {item.icon}
+                  {!isCollapsed && <span>{item.title}</span>}
+                </>
+              </Button>
+
+              {/* Submenu */}
+              {!isCollapsed &&
+                item.children &&
+                openMenus[item.title] &&
+                item.children.map((child) => {
+                  const isChildActive = pathname === child.url;
+                  return (
+                    <Link href={child.url} key={child.title} passHref>
+                      <div
+                        className={clsx(
+                          "ml-6 flex items-center gap-2 px-3 py-1 text-sm rounded-md transition-colors",
+                          isChildActive
+                            ? "bg-zinc-200 dark:bg-zinc-700 font-medium text-black dark:text-white"
+                            : "text-gray-600 dark:text-gray-300 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                         )}
-                        <Button variant="light" color="danger" startContent={<FaSignOutAlt size={16} />} onPress={() => console.log("Logout")} />
-                    </div>
-                </div>
-            </CardBody>
-        </Card>
-    );
+                      >
+                        {child.icon}
+                        <span>{child.title}</span>
+                      </div>
+                    </Link>
+                  );
+                })}
+            </div>
+          );
+        })}
+      </nav>
+    </aside>
+  );
 };
 
 export default Sidebar;

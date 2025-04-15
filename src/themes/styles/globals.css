@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --colorPrimary: rgb(25, 111, 61);
-  --colorBgBase: rgb(244, 244, 244);
-  --primaryGradientStart: rgb(25, 111, 61);
-  --primaryGradientMiddle: rgb(40, 150, 86);
-  --primaryGradientEnd: rgb(79, 221, 138);
+  --colorPrimary: rgb(...);
+  --colorInfo: rgb(...);
+  --colorSuccess: rgb(...);
+  --colorError: rgb(...);
+  --colorWarning: rgb(...);
+  --colorLink: rgb(...);
+  --colorBgBase: rgb(...);
+  --primaryGradientStart: rgb(...);
+  --primaryGradientMiddle: rgb(...);
+  --primaryGradientEnd: rgb(...);
 }
 
 body {

@@ -2,29 +2,30 @@
 
 import NavbarTop from "@/components/NavbarTop/NavbarTop";
 import Sidebar from "@/components/Sidebar/Sidebar";
-import { useSettings } from "@/hooks/useSettings";
 import ThemeComponent from "@/themes";
-import Palette from "@/themes/palette";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { Drawer, DrawerContent } from "@heroui/react";
+import React, { useEffect, useState } from "react";
 
 const MainLayout = ({ children }) => {
-  const { settings } = useSettings();
-  const pathname = usePathname();
   const [openSidebar, setOpenSidebar] = useState(false);
-  const collapsedWidth =
-    settings.navigationCollapse && !settings.navbar ? "80" : "0";
-  const sidebarMode = settings.mode === "Semi" ? "Dark" : settings.mode;
-  const contentMode = settings.mode === "Semi" ? "Light" : settings.mode;
-
   const handleOpenSidebar = () => {
     setOpenSidebar(true);
   };
   const handleCloseSidebar = () => {
     setOpenSidebar(false);
   };
-  const { mode } = settings;
-  const palettes = Palette(settings?.palette, mode);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <ThemeComponent>
       {/* <div
@@ -34,11 +35,23 @@ const MainLayout = ({ children }) => {
           transition: "background 1.5s ease-in-out",
         }}
       > */}
-      <div className="flex h-screen ">
-        <Sidebar />
+
+      <div className="flex h-screen w-screen overflow-hidden">
+        {!isMobile && <Sidebar isMobile={isMobile} />}
+        {isMobile && (
+          <Drawer
+            isOpen={openSidebar}
+            onClose={handleCloseSidebar}
+            placement="left"
+          >
+            <DrawerContent className="w-[250px]">
+              <Sidebar isMobile={isMobile} />
+            </DrawerContent>
+          </Drawer>
+        )}
         <div className="flex flex-col flex-1">
-          <NavbarTop />
-          <main as="main" className="p-4">
+          <NavbarTop isMobile={isMobile} onOpenSidebar={handleOpenSidebar} />
+          <main as="main" className="flex-1 overflow-y-auto p-4">
             {children}
           </main>
         </div>
