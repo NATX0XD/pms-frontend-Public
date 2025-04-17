@@ -20,6 +20,7 @@ import { Navigation } from "@/configurations/navigation/Navigation";
 import { useSettings } from "@/hooks/useSettings";
 import { usePathname } from "next/navigation";
 import { IoMdMenu } from "react-icons/io";
+import Palette from "@/themes/palette";
 
 const Sidebar = ({ isMobile }) => {
   const [openMenus, setOpenMenus] = useState({});
@@ -35,6 +36,7 @@ const Sidebar = ({ isMobile }) => {
     });
   };
   const isCollapsed = settings.navigationCollapse;
+
   return (
     <aside
       className={clsx(
@@ -50,7 +52,7 @@ const Sidebar = ({ isMobile }) => {
       >
         <span
           className={clsx(
-            "text-xl font-bold bg-gradient-to-r from-[var(--primaryGradientStart)] via-[var(--primaryGradientMiddle)] to-[var(--primaryGradientEnd)] bg-clip-text text-transparent",
+            "text-xl font-bold bg-gradient-to-r transition-all duration-1000 from-[var(--primaryGradientStart)] via-[var(--primaryGradientMiddle)] to-[var(--primaryGradientEnd)] bg-clip-text text-transparent",
             {
               hidden: isCollapsed,
             }

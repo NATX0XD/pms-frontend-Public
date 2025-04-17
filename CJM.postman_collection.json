@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "3305932c-6aef-449d-aeb9-481e71fabaaf",
+		"name": "CJM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26677486",
+		"_collection_link": "https://bold-comet-936109.postman.co/workspace/f2ef56cb-7c02-403e-8209-034f78ef8773/collection/26677486-3305932c-6aef-449d-aeb9-481e71fabaaf?action=share&source=collection_link&creator=26677486"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "sign-in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url-prod}}/auth/sign-in"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBkb21haW4uY29tIiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ0NzA4NDEwLCJleHAiOjE3NDQ3MzYzOTl9.hDJDkxnkj8z-lTD3JowbRUXeP3EhM5TjsXdjizMUvNk"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyName\": \"บ.ทดสอบ การค้า\",\n    \"attn\": \"customer.png\",\n    \"email\": \"customer@test.com\",\n    \"tel\": \"0812332323\",\n    \"credit\": \"1000\",\n    \"creditPeriod\": \"30\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url-prod}}/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBkb21haW4uY29tIiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ0NzA4NDEwLCJleHAiOjE3NDQ3MzYzOTl9.hDJDkxnkj8z-lTD3JowbRUXeP3EhM5TjsXdjizMUvNk"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url-prod}}/customers"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

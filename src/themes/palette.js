@@ -2,26 +2,6 @@
 // @/theme/palatte.js
 const Palette = (palette, mode) => {
   const paletteList = {
-    // Normal: {
-    //   colorPrimary: "rgb(63, 102, 145)",
-
-    //   colorInfo: "rgb(96, 132, 173)",
-    //   colorSuccess: "rgb(70, 130, 110)",
-    //   colorError: "rgb(156, 74, 74)",
-    //   colorWarning: "rgb(160, 120, 60)",
-    //   colorLink: "rgb(50, 95, 135)",
-
-    //   colorBgBase: mode === "Dark" ? "rgb(20, 25, 30)" : "rgb(245, 248, 250)",
-
-    //   primaryGradientStart:
-    //     mode === "Light" ? "rgb(63, 102, 145)" : "rgb(45, 76, 108)",
-
-    //   primaryGradientMiddle:
-    //     mode === "Light" ? "rgb(89, 128, 165)" : "rgb(63, 102, 145)",
-
-    //   primaryGradientEnd:
-    //     mode === "Light" ? "rgb(112, 150, 185)" : "rgb(89, 128, 165)",
-    // },
     Normal: {
       colorPrimary: "rgb(80, 80, 80)",
 

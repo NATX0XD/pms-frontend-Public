@@ -1,0 +1,12 @@
+// Ip 182.52.44.191 port ssh 14022
+// คำสั่งเรียกข้างนอก ssh cjmsev2024@182.52.44.191 -p 14022
+// Password devcjmsev2478
+
+
+// artcode9824@gmail.com
+// password : dev9824-2024
+
+// Portainer infomation
+// host: https:182.52.44.191:9443
+// user: cjmsev2024
+// pass: devcjmsev2478

@@ -1,6 +1,6 @@
 "use client";
 
-import "../themes/styles/globals.css";
+// import "../themes/styles/globals.css";
 import localFont from "next/font/local";
 
 const miSansThai = localFont({
