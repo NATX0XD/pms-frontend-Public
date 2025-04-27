@@ -1,7 +1,8 @@
 "use client";
 
-import NavbarTop from "@/components/NavbarTop/NavbarTop";
-import Sidebar from "@/components/Sidebar/Sidebar";
+import NavbarTop from "@/components/NavbarTop";
+import Sidebar from "@/components/Sidebar";
+import { useSettings } from "@/hooks/useSettings";
 import ThemeComponent from "@/themes";
 import { Drawer, DrawerContent } from "@heroui/react";
 import React, { useEffect, useState } from "react";
@@ -36,7 +37,7 @@ const MainLayout = ({ children }) => {
         }}
       > */}
 
-      <div className="flex h-screen w-screen overflow-hidden">
+      <div className="flex h-screen w-full overflow-hidden">
         {!isMobile && <Sidebar isMobile={isMobile} />}
         {isMobile && (
           <Drawer
@@ -49,16 +50,27 @@ const MainLayout = ({ children }) => {
             </DrawerContent>
           </Drawer>
         )}
+
         <div className="flex flex-col flex-1">
-          <NavbarTop isMobile={isMobile} onOpenSidebar={handleOpenSidebar} />
-          <main as="main" className="flex-1 overflow-y-auto p-4">
+          <div className="w-full">
+            <NavbarTop isMobile={isMobile} onOpenSidebar={handleOpenSidebar} />
+          </div>
+
+          <main className="flex-1 overflow-y-auto overflow-x-hidden p-4 max-w-full">
             {children}
           </main>
         </div>
       </div>
+
       {/* </div> */}
     </ThemeComponent>
   );
 };
 
 export default MainLayout;
+
+// overflow-x-hidden w-full
+// style={{
+//   width: "100%",
+//   maxWidth: breakpoints[settings.contentWidth],
+// }}

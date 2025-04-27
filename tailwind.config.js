@@ -7,6 +7,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./src/views/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   darkMode: "class",
   theme: {
@@ -51,15 +52,11 @@ module.exports = {
     heroui({
       themes: {
         light: {
-          colors: {
-            // default: "#fff",
-          },
+          colors: {},
         },
         dark: {
           // ...
-          colors: {
-            // default: "white",
-          },
+          colors: {},
         },
       },
     }),

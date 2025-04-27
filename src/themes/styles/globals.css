@@ -18,3 +18,20 @@ body {
   background-color: var(--colorBgBase);
   font-family: var(--font-mi-sans), sans-serif;
 }
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(94, 94, 94, 1);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(94, 94, 94, 1);
+}

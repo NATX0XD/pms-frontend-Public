@@ -9,11 +9,24 @@ import {
   Button,
   Card,
 } from "@heroui/react";
+import { useSession } from "next-auth/react";
 
-const page = () => {
+const Page = () => {
+  const { data: session, status } = useSession();
+
+  // ตรวจสอบสถานะของ session ก่อนเข้าถึง
+  if (status === "loading") return <div>Loading...</div>;
+
   return (
     <>
       <Card>Test</Card>
+      {/* ตรวจสอบว่ามี session ก่อนเรียกใช้ username */}
+      {session?.user?.username ? (
+        <div>{session.user.username}</div>
+      ) : (
+        <div>Not signed in</div>
+      )}
+
       <div className="w-full text-red-500">Page HOME</div>
       <div className="bg-primary text-white">Primary Background</div>
       <div className="text-info">Info Text</div>
@@ -26,4 +39,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

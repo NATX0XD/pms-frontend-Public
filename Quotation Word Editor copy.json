@@ -1,0 +1,1241 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "div",
+      "attrs": {
+        "style": "text-align: center; margin-bottom: 20px;"
+      },
+      "content": [
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 1,
+            "style": "font-size: 18px; font-weight: bold; margin-bottom: 5px;"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "C.J.M. LOGISTICS CO., LTD / บริษัท ซี.เจ.เอ็ม. โลจิสติกส์ จำกัด"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "style": "margin: 3px 0; font-size: 12px;"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "3 SOI PHET KASEM 58, PHET KASEM RD, BANG DUAN, PHASI CHAROEN, BANGKOK 10160, THAILAND"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "style": "margin: 3px 0; font-size: 12px;"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "3 ซอยเพชรเกษม 58 ถนนเพชรเกษม แขวงบางด้วน เขตภาษีเจริญ กรุงเทพฯ 10160"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "style": "margin: 3px 0; font-size: 12px;"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "TEL : 094-335-9335 / 099-222-9616 / 081-642-4414 / 081-493-6141"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "style": "margin: 3px 0; font-size: 12px;"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "EMAIL : CS@CJMLOGISTICS.COM / SALES@CJMLOGISTICS.COM"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "style": "margin: 3px 0; font-size: 12px;"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "TAX ID : 0-1055-63121-380 (HEAD OFFICE)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "div",
+      "attrs": {
+        "style": "text-align: center; margin: 20px 0; font-size: 16px; font-weight: bold;"
+      },
+      "content": [
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "QUOTATION / ใบเสนอราคา"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "attrs": {
+        "style": "width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 12px;"
+      },
+      "content": [
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "CUSTOMER COMPANY NAME :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "REF NO :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "ATTN :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;",
+                "colspan": 3
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "EMAIL :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;",
+                "colspan": 3
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "TEL :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "Credit Term :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "SUBJECT :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;",
+                "colspan": 3
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "AIR EXPORT SHIPMENT // CUSTOMS CLEARANCE & TRUCK FEE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "COMMODITY :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "VOLUME :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "TYPE OF ENTRY :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "FREQUENCY :"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border-bottom: 1px solid #ccc; padding: 3px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "attrs": {
+        "style": "width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;"
+      },
+      "content": [
+        {
+          "type": "tableRow",
+          "attrs": {
+            "style": "background-color: #f2f2f2;"
+          },
+          "content": [
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "DESCRIPTION"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Curr"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Price"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Q'TY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Days"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Ex-Rate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Total"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "VAT 7%"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Total Include VAT"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "attrs": {
+            "style": "background-color: #f2f2f2;"
+          },
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px; font-weight: bold;",
+                "colspan": 9
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "CUSTOMS CLEARANCE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "1st Page /Shpt"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "THB"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "200"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "1"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "-"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "-"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "200"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "-"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "200.00"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "ADD Next Page /Page"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "THB"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "200"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "-"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "-"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "-"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "-"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "-"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "attrs": {
+            "style": "font-weight: bold;"
+          },
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px; text-align: right;",
+                "colspan": 6
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "TOTAL (THB)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "13,800"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "462.00"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "style": "border: 1px solid #000; padding: 5px;"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "14,262.00"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "div",
+      "attrs": {
+        "style": "margin-bottom: 20px; font-size: 12px;"
+      },
+      "content": [
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 3,
+            "style": "font-size: 14px; font-weight: bold; margin-bottom: 10px;"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "TERM AND CONDITIONS"
+            }
+          ]
+        },
+        {
+          "type": "orderedList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "The charge for other items, which are not covered with this quotation, should be assesses after consultation with your company."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Insurance shall be insured by shipper/consignee."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "div",
+      "attrs": {
+        "style": "display: flex; justify-content: space-between; margin-top: 50px; font-size: 12px;"
+      },
+      "content": [
+        {
+          "type": "div",
+          "attrs": {
+            "style": "width: 45%;"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Your Faithfully ………………………………………………"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ISSUE BY SALES NAME"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Mobile : Mobile Number"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "attrs": {
+            "style": "width: 45%;"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "hereby confirm acceptance of the above"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Name/Position:"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Date:"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

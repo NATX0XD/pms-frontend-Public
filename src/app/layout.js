@@ -2,7 +2,7 @@
 
 // import "../themes/styles/globals.css";
 import localFont from "next/font/local";
-
+import "../themes/styles/globals.css";
 const miSansThai = localFont({
   src: [
     {

@@ -1,76 +1,100 @@
 "use client";
 import { useSettings } from "@/hooks/useSettings";
-import { FaMoon } from "react-icons/fa";
-import { GoSun } from "react-icons/go";
+
 import { Button, Card, CardBody, Form, Input } from "@heroui/react";
 import React, { useState } from "react";
 import clsx from "clsx";
-// import { signIn, useSession } from "next-auth/react";
-// import { useRouter } from "next/navigation";
-// import { authController } from "@/api/controllers/auth";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { IoMdSunny } from "react-icons/io";
+import { FaMoon } from "react-icons/fa";
+import SignInPage from "@/views/sign-in/SignInPage";
 
 const SignIn = () => {
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setError(null);
-
-  //   const res = await signIn("credentials", {
-  //     redirect: false,
-  //     username,
-  //     password,
-  //   });
-
-  //   if (res?.error) {
-  //     setError("Invalid username or password");
-  //   } else {
-  //     router.push("/");
-  //   }
-  // };
-
-  // const handleSignIn = async ({ username, password }) => {
-  //   setLoading(true);
-  //   const result = await signIn("credentials", {
-  //     username,
-  //     password,
-  //     redirect: false,
-  //   });
-  //   setLoading(false);
-  //   if (result.ok && result.status === 200) {
-  //     router.replace("/");
-  //   }
-  // };
+  const [error, setError] = useState("");
+  const router = useRouter();
   const { settings, saveSettings } = useSettings();
-
+  const [resetPasswordToken, setResetPasswordToken] = useState(null);
+  const [loading, setLoading] = useState(false);
   const switchMode = () => {
     saveSettings("mode");
   };
   const handleChange = (name, value) => {
     saveSettings({ ...settings, [name]: value });
   };
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const handleSignIn = (e) => {
+
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+  //   setError(""); // เคลียร์ error ก่อน
+
+  //   const form = new FormData(e.target);
+  //   const username = form.get("username");
+  //   const password = form.get("password");
+
+  //   const result = await signIn("credentials", {
+  //     username,
+  //     password,
+  //     redirect: false,
+  //   });
+
+  //   if (result?.error) {
+  //     setError("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+  //   } else {
+  //     router.replace("/");
+  //   }
+  // };
+  const handleSignIn = async (e) => {
     e.preventDefault();
-
-    if (!username || !password) {
-      setError("กรุณากรอกชื่อบัญชีและรหัสผ่านให้ครบถ้วน");
-      return;
-    }
     setError("");
+    setLoading(true);
 
-    console.log("ข้อมูลการเข้าสู่ระบบ:", { username, password });
+    const form = new FormData(e.target);
+    const username = form.get("username");
+    const password = form.get("password");
 
-    // fetch('/api/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ username, password })
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log('API Response:', data))
-    // .catch(err => setError('เกิดข้อผิดพลาดในการเชื่อมต่อ'));
+    const result = await signIn("credentials", {
+      username,
+      password,
+      redirect: false,
+    });
+    setLoading(false);
+    if (result.error && !result.ok) {
+      const error = JSON.parse(result.error);
+      if (error.code === 21201) {
+        setResetPasswordToken(error.data.access_token);
+      } else if (error.code === 21206) {
+        // form.setFields([
+        //   {
+        //     name: "username",
+        //     errors: [error.description],
+        //   },
+        // ]);
+        console.log(error.description);
+        setError(error.description);
+      } else if (error.code === 21202) {
+        // form.setFields([
+        //   {
+        //     name: "password",
+        //     errors: [error.description],
+        //   },
+        // ]);
+        console.log(error.description);
+        setError(error.description);
+      } else if (error.code === 21207) {
+        // notification.error({
+        //   message: "เข้าสู่ระบบไม่สำเร็จ",
+        //   description: error.description,
+        //   showProgress: true,
+        //   pauseOnHover: true,
+        // });
+        console.log("เข้าสู่ระบบไม่สำเร็จ");
+        setError("เข้าสู่ระบบไม่สำเร็จ");
+      }
+    }
+    if (result.ok && result.status === 200) {
+      router.replace("/");
+    }
   };
-
   const inputStyles = {
     innerWrapper: "bg-transparent",
     input: ["bg-transparent", "text-black", "placeholder:text-gray-400"],
@@ -87,157 +111,83 @@ const SignIn = () => {
     ],
   };
   return (
-    <>
-      {/* <div className="hidden sm:flex md:w-1/2 relative flex-col justify-center items-center p-8">
-        <div className="absolute inset-0 z-0"></div>
-        <div className="z-10 relative max-w-md">
-          <h1 className="text-4xl font-bold mb-6">
-            {process.env.NEXT_PUBLIC_APP_NAME}
-          </h1>
-          <p className="text-xl mb-8">
-            ยินดีต้อนรับสู่ {process.env.NEXT_PUBLIC_APP_NAME}{" "}
-            ระบบจัดการเนื้อหาการขนส่งและโลจิสติกส์ที่มีประสิทธิภาพ
-          </p>
-        </div>
-      </div> */}
+    // <>
+    //   <Card className="flex flex-col md:flex-row w-full max-w-3xl shadow-xl rounded-2xl overflow-hidden p-6 m-8">
+    //     <div
+    //       className="hidden sm:flex md:w-2/5 text-white items-center justify-center p-6"
+    //       style={{
+    //         borderRadius: 16,
+    //         background: `linear-gradient(135deg, var(--primaryGradientStart) 0%, var(--primaryGradientMiddle) 50%, var(--primaryGradientEnd) 100%)`,
+    //       }}
+    //     >
+    //       <div>
+    //         <h1 className="text-3xl font-bold mb-4">Welcome Back!</h1>
+    //         <p className="text-sm">
+    //           Sign in to your account to continue to the{" "}
+    //           {process.env.NEXT_PUBLIC_APP_NAME} dashboard .
+    //         </p>
+    //       </div>
+    //     </div>
 
-      {/* <div className="w-full md:w-1/2 flex items-center justify-center p-8">
-        <div
-          className="w-full max-w-md p-8 shadow-lg"
-          style={{
-            borderRadius: 26,
-            background: "rgba(255, 255, 255)",
-          }}
-        >
-          <div className="text-center mb-8">
-            <h2
-              className={clsx(
-                "pb-5 text-3xl font-bold bg-gradient-to-r transition-all duration-1000 from-[var(--primaryGradientStart)] via-[var(--primaryGradientMiddle)] to-[var(--primaryGradientEnd)] bg-clip-text text-transparent"
-              )}
-            >
-              {process.env.NEXT_PUBLIC_APP_NAME}
-            </h2>
-            <h2 className="text-2xl font-bold">ลงชื่อเข้าใช้</h2>
-            <p className="mt-2">
-              ยินดีต้อนรับกลับมา! กรุณาลงชื่อเข้าใช้บัญชีของคุณ
-            </p>
-          </div>
+    //     <div className="md:w-3/5 bg-transparent p-8">
+    //       <CardBody className="space-y-6">
+    //         <div className=" text-center ">
+    //           <h2
+    //             className={clsx(
+    //               "text-3xl font-bold bg-gradient-to-r transition-all duration-1000 from-[var(--primaryGradientStart)] via-[var(--primaryGradientMiddle)] to-[var(--primaryGradientEnd)] bg-clip-text text-transparent"
+    //             )}
+    //           >
+    //             {process.env.NEXT_PUBLIC_APP_NAME}
+    //           </h2>
+    //           <h2 className="text-2xl font-semibold dark:text-white mb-2">
+    //             ลงชื่อเข้าใช้
+    //           </h2>
+    //           {error && <p className="text-red-500 text-sm">{error}</p>}
+    //         </div>
+    //         <Form onSubmit={handleSignIn} className="space-y-8 w-full">
+    //           <Input
+    //             label="Username"
+    //             type="text"
+    //             placeholder="กรอกชื่อผู้ใช้"
+    //             name="username"
+    //             classNames={inputStyles}
+    //           />
 
-          <Form onSubmit={handleSignIn} className="space-y-8 w-full">
-            <Input
-              key={"username"}
-              label="ชื่อผู้ใช้"
-              labelPlacement={"inside"}
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              classNames={inputStyles}
-              size="md"
-            />
-            <Input
-              key={"password"}
-              label="รหัสผ่าน"
-              labelPlacement={"inside"}
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              classNames={inputStyles}
-              size="md"
-            />
+    //           <Input
+    //             label="Password"
+    //             type="Password"
+    //             placeholder="กรอกรหัสผ่าน"
+    //             name="password"
+    //             classNames={inputStyles}
+    //           />
+    //           <Button type="submit" color="primary" fullWidth>
+    //             Sign In
+    //           </Button>
+    //         </Form>
+    //       </CardBody>
+    //     </div>
+    //   </Card>
 
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full bg-primary rounded-lg"
-              disabled={!username || !password}
-            >
-              เข้าสู่ระบบ
-            </Button>
-          </Form>
-        </div>
-      </div> */}
-
-      <Card className="flex flex-col md:flex-row w-full max-w-3xl shadow-xl rounded-2xl overflow-hidden p-6 m-8">
-        <div
-          className="hidden sm:flex md:w-2/5 text-white items-center justify-center p-8"
-          style={{
-            borderRadius: 16,
-            background: `linear-gradient(135deg, var(--primaryGradientStart) 0%, var(--primaryGradientMiddle) 50%, var(--primaryGradientEnd) 100%)`,
-          }}
-        >
-          <div>
-            <h1 className="text-3xl font-bold mb-4">Welcome Back!</h1>
-            {/* <h3 className="text-2xl font-bold ">
-              {process.env.NEXT_PUBLIC_APP_NAME}
-            </h3> */}
-            <p className="text-sm">
-              Sign in to your account to continue to the{" "}
-              {process.env.NEXT_PUBLIC_APP_NAME} dashboard .
-            </p>
-          </div>
-        </div>
-
-        <div className="md:w-3/5 bg-transparent p-8">
-          <CardBody className="space-y-6">
-            <div className=" text-center ">
-              <h2
-                className={clsx(
-                  "text-3xl font-bold bg-gradient-to-r transition-all duration-1000 from-[var(--primaryGradientStart)] via-[var(--primaryGradientMiddle)] to-[var(--primaryGradientEnd)] bg-clip-text text-transparent"
-                )}
-              >
-                {process.env.NEXT_PUBLIC_APP_NAME}
-              </h2>
-              <h2 className="text-2xl font-semibold dark:text-white">
-                ลงชื่อเข้าใช้
-              </h2>
-            </div>
-            <Form onSubmit={handleSignIn} className="space-y-8 w-full">
-              <Input
-                label="Username"
-                type="text"
-                placeholder="กรอกชื่อผู้ใช้"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                classNames={inputStyles}
-              />
-
-              <Input
-                label="Password"
-                type="Password"
-                placeholder="กรอกรหัสผ่าน"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                classNames={inputStyles}
-              />
-              <Button color="primary" fullWidth>
-                Sign In
-              </Button>
-            </Form>
-          </CardBody>
-        </div>
-      </Card>
-
-      <div className="fixed bottom-5 right-5 z-50">
-        <Button
-          isIconOnly
-          radius="full"
-          size="md"
-          variant="solid"
-          className="bg-white dark:bg-black/70 backdrop-blur-md"
-          onPress={() =>
-            handleChange("mode", settings.mode === "Dark" ? "Light" : "Dark")
-          }
-        >
-          {settings.mode === "Dark" ? (
-            <GoSun className="text-lg" />
-          ) : (
-            <FaMoon className="text-lg" />
-          )}
-        </Button>
-      </div>
-    </>
+    //   <div className="fixed bottom-5 right-5 z-50">
+    //     <Button
+    //       isIconOnly
+    //       radius="full"
+    //       size="md"
+    //       variant="solid"
+    //       className="bg-white dark:bg-black/70 backdrop-blur-md"
+    //       onPress={() =>
+    //         handleChange("mode", settings.mode === "Dark" ? "Light" : "Dark")
+    //       }
+    //     >
+    //       {settings.mode === "Dark" ? (
+    //         <IoMdSunny className="text-lg" />
+    //       ) : (
+    //         <FaMoon className="text-lg" />
+    //       )}
+    //     </Button>
+    //   </div>
+    // </>
+    <SignInPage />
   );
 };
 

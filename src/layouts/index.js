@@ -1,10 +1,12 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import MainLayout from "./MainLayout";
 import AuthLayout from "./AuthLayout";
 import ErrorLayout from "./ErrorLayout";
 
 import "../themes/styles/globals.css";
+import { HeroUIProvider, ToastProvider } from "@heroui/react";
+
 const layouts = {
   MainLayout,
   AuthLayout,
@@ -20,6 +22,12 @@ const AppLayout = ({ children }) => {
     : errorPage.includes(pathname)
     ? layouts["ErrorLayout"]
     : layouts["MainLayout"];
-  return <LayoutWrapper>{children}</LayoutWrapper>;
+
+  return (
+    <HeroUIProvider>
+      <ToastProvider />
+      <LayoutWrapper>{children}</LayoutWrapper>
+    </HeroUIProvider>
+  );
 };
 export default AppLayout;

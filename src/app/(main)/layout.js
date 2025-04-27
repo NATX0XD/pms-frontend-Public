@@ -1,5 +1,7 @@
 import dynamic from "next/dynamic";
 import { Providers } from "./providers";
+import "../../themes/styles/globals.css";
+
 const AppLayout = dynamic(() => import("@/layouts"), {
   ssr: false,
 });
