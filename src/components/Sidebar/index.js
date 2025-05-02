@@ -30,7 +30,7 @@ const Sidebar = ({ isMobile }) => {
     <aside
       className={clsx(
         "h-full bg-white dark:bg-background shadow-md transition-all duration-300",
-        isMobile ? "w-full" : isCollapsed ? "w-[80px]" : "w-[250px]"
+        isMobile ? "w-full" : isCollapsed ? "min-w-[80px]" : "min-w-[250px]"
       )}
     >
       <div

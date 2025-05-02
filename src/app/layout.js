@@ -19,12 +19,15 @@ const miSansThai = localFont({
   variable: "--font-mi-sans",
 });
 
-export default function Layout({ children, title = "CJM Logistic" }) {
+export default function Layout({
+  children,
+  title = process.env.NEXT_PUBLIC_APP_NAME,
+}) {
   return (
     <html lang="en" className={miSansThai.variable}>
       <head>
         <title>{title}</title>
-        <meta name="description" content="CJM Logistic" />
+        <meta name="description" content={process.env.NEXT_PUBLIC_APP_NAME} />
       </head>
       <body>{children}</body>
     </html>

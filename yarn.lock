@@ -1937,6 +1937,14 @@
     "@react-types/shared" "^3.28.0"
     "@swc/helpers" "^0.5.0"
 
+"@react-stately/data@^3.12.3":
+  version "3.12.3"
+  resolved "https://registry.yarnpkg.com/@react-stately/data/-/data-3.12.3.tgz#0f26b5658b49f1f3d1d478f36167e3a80abf62e3"
+  integrity sha512-JYPNV1gd9OZm8xPay0exx5okFNgiwESNvdBHsfDC+f8BifRyFLdrvoaUGF0enKIeSQMB1oReFAxTAXtDZd27rA==
+  dependencies:
+    "@react-types/shared" "^3.29.0"
+    "@swc/helpers" "^0.5.0"
+
 "@react-stately/datepicker@3.13.0", "@react-stately/datepicker@^3.13.0":
   version "3.13.0"
   resolved "https://registry.npmjs.org/@react-stately/datepicker/-/datepicker-3.13.0.tgz"
@@ -2277,6 +2285,11 @@
   version "3.28.0"
   resolved "https://registry.npmjs.org/@react-types/shared/-/shared-3.28.0.tgz"
   integrity sha512-9oMEYIDc3sk0G5rysnYvdNrkSg7B04yTKl50HHSZVbokeHpnU0yRmsDaWb9B/5RprcKj8XszEk5guBO8Sa/Q+Q==
+
+"@react-types/shared@^3.29.0":
+  version "3.29.0"
+  resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.29.0.tgz#f29bdad3bff1336aaa754d7abc420da2f014d931"
+  integrity sha512-IDQYu/AHgZimObzCFdNl1LpZvQW/xcfLt3v20sorl5qRucDVj4S9os98sVTZ4IRIBjmS+MkjqpR5E70xan7ooA==
 
 "@react-types/slider@^3.7.9":
   version "3.7.9"

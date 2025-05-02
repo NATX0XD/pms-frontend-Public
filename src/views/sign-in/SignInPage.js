@@ -122,7 +122,7 @@ const SignInPage = () => {
             label="Username "
             name="username"
             placeholder="กรุณากรอกชื่อผู้ใช้"
-            type="username"
+            type="text"
             variant="bordered"
             size="lg"
           />

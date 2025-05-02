@@ -52,11 +52,11 @@ const MainLayout = ({ children }) => {
         )}
 
         <div className="flex flex-col flex-1">
-          <div className="w-full">
+          <div className="w-full  max-w-[100vw]">
             <NavbarTop isMobile={isMobile} onOpenSidebar={handleOpenSidebar} />
           </div>
 
-          <main className="flex-1 overflow-y-auto overflow-x-hidden p-4 max-w-full">
+          <main className="flex-1 overflow-y-auto overflow-x-hidden p-4  w-full max-w-[100vw]">
             {children}
           </main>
         </div>
