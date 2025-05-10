@@ -15,8 +15,9 @@ import { useRouter } from "next/navigation";
 import { useSettings } from "@/hooks/useSettings";
 import { signIn } from "next-auth/react";
 import clsx from "clsx";
-import { IoEye, IoEyeOff } from "react-icons/io5";
 import { BiPackage } from "react-icons/bi";
+import { EyeIcon } from "@/components/icon/EyeIcon";
+import { EyeSlashIcon } from "@/components/icon/EyeSlashIcon";
 
 const SignInPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -133,9 +134,9 @@ const SignInPage = () => {
             endContent={
               <button type="button" onClick={toggleVisibility}>
                 {isVisible ? (
-                  <IoEyeOff className="pointer-events-none text-2xl text-default-400" />
+                  <EyeSlashIcon className="pointer-events-none text-2xl text-default-400" />
                 ) : (
-                  <IoEye className="pointer-events-none text-2xl text-default-400" />
+                  <EyeIcon className="pointer-events-none text-2xl text-default-400" />
                 )}
               </button>
             }

@@ -18,12 +18,16 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  Tooltip,
   User,
 } from "@heroui/react";
 import { Input } from "postcss";
 import React, { useCallback, useMemo, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
+import { EyeIcon } from "../icon/EyeIcon";
+import { DeleteIcon } from "../icon/DeleteIcon";
+import { EditIcon } from "../icon/EditIcon";
 
 const TableQuery = ({ titleTable, sorting, isLoading, columns, height }) => {
   const [selectedKeys, setSelectedKeys] = useState(new Set([]));
@@ -68,78 +72,115 @@ const TableQuery = ({ titleTable, sorting, isLoading, columns, height }) => {
     setPage(1);
   }, []);
 
-  const renderCell = useCallback((user, columnKey) => {
-    const cellValue = user[columnKey];
+  const renderCell = useCallback(
+    (item, columnKey) => {
+      const column = columns.find((col) => col.key === columnKey);
+      const cellValue = item[columnKey];
+      if (!column) return cellValue;
 
-    switch (columnKey) {
-      case "name":
-        return (
-          <User
-            avatarProps={{ radius: "lg", src: user.avatar }}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {user.team}
-            </p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Dropdown className="min-w-[120px]">
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <IoEllipsisVertical />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem key="view">View</DropdownItem>
-                <DropdownItem key="edit">Edit</DropdownItem>
-                <DropdownItem key="delete">Delete</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+      switch (column.type) {
+        case "users":
+          return (
+            <User
+              avatarProps={{ radius: "lg", src: cellValue }}
+              description={item.email}
+              name={`${item.firstName} ${item.lastName}`}
+            ></User>
+          );
+        case "image":
+          return (
+            <img
+              src={cellValue}
+              alt={item.title || "product image"}
+              className="w-16 h-16 object-cover rounded"
+            />
+          );
+        case "chip":
+          return (
+            <div className="flex gap-2 flex-wrap">
+              {(Array.isArray(cellValue) ? cellValue : [cellValue]).map(
+                (tag, idx) => (
+                  <Chip key={idx} color="primary" size="sm">
+                    {tag}
+                  </Chip>
+                )
+              )}
+            </div>
+          );
+        case "actions":
+          return (
+            // <div className="relative flex justify-end items-center gap-2">
+            //   <Dropdown className="min-w-[120px]">
+            //     <DropdownTrigger>
+            //       <Button isIconOnly size="sm" variant="light">
+            //         <IoEllipsisVertical />
+            //       </Button>
+            //     </DropdownTrigger>
+            //     <DropdownMenu>
+            //       <DropdownItem key="view">View</DropdownItem>
+            //       <DropdownItem key="edit">Edit</DropdownItem>
+            //       <DropdownItem key="delete">Delete</DropdownItem>
+            //     </DropdownMenu>
+            //   </Dropdown>
+            // </div>
+            <div className="relative flex items-center gap-2">
+              <Tooltip content="Details">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <EyeIcon />
+                </span>
+              </Tooltip>
+              <Tooltip content="Edit user">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <EditIcon />
+                </span>
+              </Tooltip>
+              <Tooltip color="danger" content="Delete user">
+                <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                  <DeleteIcon />
+                </span>
+              </Tooltip>
+            </div>
+          );
+        default:
+          return cellValue;
+      }
+    },
+    [columns]
+  );
 
   const topContent = useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
         <div className="flex justify-between gap-3 items-center">
-          <h1 className="text-2xl font-bold p-2"> {titleTable}</h1>
+          <h1 className="text-2xl font-bold p-2">
+            {" "}
+            {titleTable}{" "}
+            {selectedKeys.size > 0 || selectedKeys === "all" ? (
+              <span className="w-[30%] text-small text-default-400">
+                {selectedKeys === "all"
+                  ? "All items selected"
+                  : `${selectedKeys.size} of ${sorting.items.length} selected`}
+              </span>
+            ) : (
+              <span className="text-default-400 text-small">
+                Total {sorting.items.length}
+              </span>
+            )}
+          </h1>
           <Button color="primary" endContent={<FaPlus />}>
             Add New
           </Button>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
-            Total {sorting.items.length}
-          </span>
-          <label className="flex items-center text-default-400 text-small">
-            Rows per page:
-            {/* <Select
+      </div>
+    );
+  }, [selectedKeys, sorting.items.length, page, pages, onRowsPerPageChange]);
+
+  const bottomContent = useMemo(() => {
+    return (
+      <div className="py-2 px-2 flex justify-between items-center">
+        <label className="flex items-center text-default-400 text-small">
+          Rows per page:
+          {/* <Select
               className="max-w-xs"
               size="sm"
               selectedKeys={new Set([rowsPerPage.toString()])}
@@ -150,30 +191,18 @@ const TableQuery = ({ titleTable, sorting, isLoading, columns, height }) => {
               <SelectItem key="10">10</SelectItem>
               <SelectItem key="15">15</SelectItem>
             </Select> */}
-            <select
-              className="bg-transparent outline-none text-default-400 text-small"
-              defaultValue={rowsPerPage}
-              // value={rowsPerPage}
-              onChange={onRowsPerPageChange}
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-            </select>
-          </label>
-        </div>
-      </div>
-    );
-  }, [onRowsPerPageChange, sorting.items.length]);
+          <select
+            className="bg-transparent outline-none text-default-400 text-small"
+            defaultValue={rowsPerPage}
+            // value={rowsPerPage}
+            onChange={onRowsPerPageChange}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select>
+        </label>
 
-  const bottomContent = useMemo(() => {
-    return (
-      <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
-          {selectedKeys === "all"
-            ? "All items selected"
-            : `${selectedKeys.size} of ${sorting.items.length} selected`}
-        </span>
         {pages > 0 ? (
           <>
             <Pagination
@@ -207,11 +236,12 @@ const TableQuery = ({ titleTable, sorting, isLoading, columns, height }) => {
         ) : null}
       </div>
     );
-  }, [selectedKeys, sorting.items.length, page, pages]);
+  }, [selectedKeys, sorting.items.length, page, pages, onRowsPerPageChange]);
 
   return (
     <>
       <Table
+        isHeaderSticky
         aria-label={titleTable}
         selectedKeys={selectedKeys}
         selectionMode="multiple"
@@ -227,7 +257,8 @@ const TableQuery = ({ titleTable, sorting, isLoading, columns, height }) => {
           );
         }}
         classNames={{
-          table: `min-h-[${height}]`,
+          table: "min-w-full",
+          base: `overflow-auto max-h-[${height || "calc(100vh-200px)"}]`,
         }}
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
@@ -259,7 +290,7 @@ const TableQuery = ({ titleTable, sorting, isLoading, columns, height }) => {
             </TableRow>
           )}
         </TableBody>
-      </Table>
+      </Table>{" "}
     </>
   );
 };
