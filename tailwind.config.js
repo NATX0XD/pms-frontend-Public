@@ -15,9 +15,9 @@ module.exports = {
       colors: {
         primary: "var(--colorPrimary)",
         info: "var(--colorInfo)",
-        success: "var(--colorSuccess)",
+        // success: "var(--colorSuccess)",
         error: "var(--colorError)",
-        warning: "var(--colorWarning)",
+        // warning: "var(--colorWarning)",
         link: "var(--colorLink)",
         background: "var(--colorBgBase)",
         gradientStart: "var(--primaryGradientStart)",

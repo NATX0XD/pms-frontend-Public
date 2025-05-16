@@ -56,7 +56,7 @@ const columnsUsers = [
 const FormUsers = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  let list = useAsyncList({
+  let listUsers = useAsyncList({
     async load({ signal }) {
       let res = await fetch("https://dummyjson.com/users", {
         signal,
@@ -89,7 +89,7 @@ const FormUsers = () => {
   return (
     <TableQuery
       titleTable="Accounts Users List"
-      sorting={list}
+      sorting={listUsers}
       isLoading={isLoading}
       columns={columnsUsers}
       // height="600px"

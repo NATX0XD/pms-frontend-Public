@@ -11,7 +11,7 @@ export default function ProtectedRoute({ children }) {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/sign-in");
+      // router.push("/sign-in");
     }
   }, [status, router]);
 

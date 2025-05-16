@@ -1,15 +1,34 @@
+"use client";
 import {
   Button,
   Card,
   Dropdown,
+  DropdownItem,
+  DropdownMenu,
   DropdownTrigger,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  NumberInput,
+  Select,
+  SelectItem,
   Tooltip,
+  useDisclosure,
 } from "@heroui/react";
 import React, { useState } from "react";
-import { IoSettingsOutline } from "react-icons/io5";
+import {
+  IoArrowBack,
+  IoOptionsOutline,
+  IoSettingsOutline,
+} from "react-icons/io5";
 import ModalLayoutSetting from "./ModalLayoutSetting";
 import { debounce } from "lodash";
-import { MdOutlineMoreVert } from "react-icons/md";
+import { MdCancel, MdOutlineMoreVert } from "react-icons/md";
+import { FaImage, FaRegSave } from "react-icons/fa";
+import TableOptions from "@/configurations/WordEditorItems/TableOptions";
+import DrawerOptionTable from "./DrawerOptionTable";
 
 const MenuBar = ({
   editor,
@@ -28,6 +47,11 @@ const MenuBar = ({
   pageLayoutFunction,
   buttonClose = null,
   optionBar = true,
+  isSaving,
+  saveAsJson,
+  handleFileUpload,
+  setIsWordOpen,
+  isWordOpen,
 }) => {
   if (!editor) {
     return null;
@@ -38,6 +62,7 @@ const MenuBar = ({
   const [openPageLayoutSetting, setOpenPageLayoutSetting] = useState(false);
   const [tempPageLayout, setTempPageLayout] = useState(null);
   const [arrangement, setArrangement] = useState("vertical");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleOpenPageLayoutSetting = () => {
     setOpenPageLayoutSetting(true);
@@ -102,26 +127,32 @@ const MenuBar = ({
       console.log("ไม่สามารถเปลี่ยนสีตัวอักษรได้", error);
     }
   }, 200);
-  const handleChangeTableColor = debounce((value) => {
-    try {
-      if (value && value.toHexString) {
-        const hexColor = value.toHexString();
-        editor
-          .chain()
-          .focus()
-          .setCellAttribute("backgroundColor", `${hexColor}`, {
-            header: true,
-          })
-          .run();
-      }
-    } catch (error) {
-      //   message.open({
-      //     type: "error",
-      //     content: "ไม่สามารถเปลี่ยนสีตารางได้",
-      //   });
-      console.log("ไม่สามารถเปลี่ยนสีตารางได้", error);
-    }
-  }, 200);
+  // const handleChangeTableColor = debounce((value) => {
+  //   try {
+  //     if (value && value.toHexString) {
+  //       const hexColor = value.toHexString();
+  //       editor
+  //         .chain()
+  //         .focus()
+  //         .setCellAttribute("backgroundColor", `${hexColor}`, {
+  //           header: true,
+  //         })
+  //         .run();
+  //     }
+  //   } catch (error) {
+
+  //     console.log("ไม่สามารถเปลี่ยนสีตารางได้", error);
+  //   }
+  // }, 200);
+  const handleChangeTableColor = (event) => {
+    const hexColor = event.target.value;
+    editor
+      .chain()
+      .focus()
+      .setCellAttribute("backgroundColor", hexColor, { header: true })
+      .run();
+  };
+
   const getActiveHeading = () => {
     for (let level = 1; level <= 4; level++) {
       if (editor.isActive("heading", { level })) {
@@ -178,14 +209,102 @@ const MenuBar = ({
       reader.readAsText(file);
     }
   };
+  const {
+    isOpen: isConfirmModal,
+    onOpen: openConfirmModal,
+    onClose: closeConfirmModal,
+  } = useDisclosure();
+  const handleExit = () => {
+    setIsWordOpen(false);
+    closeConfirmModal();
+  };
+  const {
+    isOpen: isDrawer,
+    onOpen: openDrawer,
+    onClose: closeDrawer,
+  } = useDisclosure();
 
   return (
     <Card className="w-full p-2 rounded-xl shadow-sm">
-      {/* <input type="file" accept="application/json" onChange={handleUpload} /> */}
       <div className=" flex flex-row items-center justify-center gap-2">
-        <Button onPress={() => document.getElementById("image-upload").click()}>
-          Image
-        </Button>
+        <Modal isOpen={isConfirmModal} onOpenChange={closeConfirmModal}>
+          <ModalContent>
+            <ModalHeader className="flex flex-col gap-1">
+              ยืนยันการออกจากเอกสาร
+            </ModalHeader>
+            <ModalBody>
+              คุณต้องการออกจากเอกสารนี้หรือไม่? <br />
+              การแก้ไขปัจจุบันจะไม่ถูกบันทึกหากยังไม่ได้บันทึกไฟล์.
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                color="danger"
+                variant="light"
+                onPress={closeConfirmModal}
+              >
+                ยกเลิก
+              </Button>
+              <Button color="primary" onPress={handleExit}>
+                ออกจากเอกสาร
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
+        <Dropdown>
+          <DropdownTrigger>
+            <Button
+              style={{
+                fontSize: 20,
+                padding: 0,
+                margin: 0,
+              }}
+              variant={"bordered"}
+              isIconOnly
+              size="md"
+              radius="sm"
+            >
+              <MdOutlineMoreVert />
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Editor Actions">
+            {isWordOpen && (
+              <DropdownItem key="save" onPress={openConfirmModal}>
+                {/* <Button isIconOnly onPress={openConfirmModal}> */}
+                {/* </Button> */}
+                <div className="flex flex-row items-center gap-2">
+                  <IoArrowBack /> ออกจากเอกสาร
+                </div>
+              </DropdownItem>
+            )}
+            <DropdownItem
+              key="save"
+              onPress={saveAsJson}
+              disabled={isSaving || !editor}
+            >
+              <div className="flex flex-row items-center gap-2">
+                <FaRegSave /> Save File
+              </div>
+            </DropdownItem>
+            <DropdownItem
+              key="save"
+              onPress={() => document.getElementById("file-upload").click()}
+            >
+              <div className="flex flex-row items-center gap-2">
+                {/* <FaRegSave />  */}
+                Import File Json
+              </div>
+            </DropdownItem>
+            <DropdownItem
+              key="add image"
+              onPress={() => document.getElementById("image-upload").click()}
+            >
+              <div className="flex flex-row items-center gap-2">
+                <FaImage /> add Images
+              </div>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <input
           id="image-upload"
           type="file"
@@ -193,8 +312,82 @@ const MenuBar = ({
           onChange={handleFileChange}
           style={{ display: "none" }}
         />
+        <input
+          type="file"
+          id="file-upload"
+          style={{ display: "none" }}
+          accept=".json,.docx,.pdf"
+          onChange={handleFileUpload}
+        />
 
         <div className="flex flex-row items-center gap-2">
+          {fontSize || fontColor || fontFormat ? (
+            <div className="flex flex-row items-center gap-5">
+              {fontFormat && (
+                <Tooltip showArrow={true} content="Format Type">
+                  <Select
+                    classNames={"w-full"}
+                    size="small"
+                    className="max-w-xs"
+                    label="Select Format"
+                    placeholder={getActiveHeading() || "Format"}
+                    onSelectionChange={handleChangeFontFormat}
+                  >
+                    <SelectItem value="h1">
+                      <strong> Header</strong>
+                    </SelectItem>
+                    <SelectItem value="h2">
+                      <strong> Title</strong>
+                    </SelectItem>
+                    <SelectItem value="h3">
+                      <strong> SubTitle</strong>
+                    </SelectItem>
+                    <SelectItem value="h4">
+                      <strong> Normal</strong>
+                    </SelectItem>
+                  </Select>
+                </Tooltip>
+              )}
+              {fontSize && (
+                <Tooltip showArrow={true} content="Font size">
+                  <NumberInput
+                    size="small"
+                    minValue={1}
+                    defaultValue={16}
+                    maxValue={106}
+                    onValueChange={handleChangeSizeFont}
+                    style={{ width: 20, maxWidth: 55 }}
+                  />
+                </Tooltip>
+              )}
+              {fontColor && (
+                // <ColorPicker
+                //   size="middle"
+                //   defaultValue="#000000"
+                //   value={currentFontColor}
+                //   open={openFontColor}
+                //   onOpenChange={setOpenFontColor}
+                //   trigger="hover"
+                //   onChange={handleChangeFontColor}
+                //   showText={() => (
+                //     <DownOutlined
+                //       rotate={openFontColor ? 180 : 0}
+                //       style={{
+                //         color: "rgba(0, 0, 0, 0.25)",
+                //       }}
+                //     />
+                //   )}
+                // />
+                <input
+                  type="color"
+                  value={currentFontColor}
+                  onChange={handleChangeFontColor}
+                  className="w-full h-12 cursor-pointer"
+                  style={{ border: "none" }}
+                />
+              )}
+            </div>
+          ) : null}
           {Object.entries(
             editorsItems.reduce((groups, item) => {
               const groupKey = item.group || "default";
@@ -250,298 +443,32 @@ const MenuBar = ({
                             </Tooltip>
                             {editor.isActive("table") && (
                               <>
-                                <Dropdown>
-                                  <DropdownTrigger>
-                                    <Button
-                                      style={{
-                                        fontSize: 20,
-                                        padding: 0,
-                                        margin: 0,
-                                      }}
-                                      isIconOnly
-                                      size="md"
-                                      radius="lg"
-                                    >
-                                      <MdOutlineMoreVert />
-                                    </Button>
-                                  </DropdownTrigger>
-                                </Dropdown>
+                                <Button
+                                  style={{
+                                    fontSize: 20,
+                                    padding: 0,
+                                    margin: 0,
+                                  }}
+                                  isIconOnly
+                                  size="sm"
+                                  radius="sm"
+                                  onPress={openDrawer}
+                                  variant="light"
+                                >
+                                  <IoOptionsOutline />
+                                </Button>
 
-                                {/* <Dropdown
-                                trigger={["click"]}
-                                dropdownRender={() => (
-                                  <Card
-                                    style={{ padding: 15, margin: 0 }}
-                                    styles={{ body: { padding: 0, margin: 0 } }}
-                                  >
-                                    <Flex gap={5} align="center" wrap="wrap">
-                                      <Flex
-                                        gap={5}
-                                        align="center"
-                                        wrap="wrap"
-                                        vertical
-                                      >
-                                        <Tooltip title="Add Column Before">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("addColumnBefore"),
-                                            }}
-                                            icon={
-                                              <i className="ri-insert-column-left"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .addColumnBefore()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().addColumnBefore()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Add Column After">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("addColumnAfter"),
-                                            }}
-                                            icon={
-                                              <i className="ri-insert-column-right"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .addColumnAfter()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().addColumnAfter()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Delete Column">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("deleteColumn"),
-                                            }}
-                                            icon={
-                                              <i className="ri-delete-column"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .deleteColumn()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().deleteColumn()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Add Row Before">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("addRowBefore"),
-                                            }}
-                                            icon={
-                                              <i className="ri-insert-row-top"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .addRowBefore()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().addRowBefore()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Add Row After">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("addRowAfter"),
-                                            }}
-                                            icon={
-                                              <i className="ri-insert-row-bottom"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .addRowAfter()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().addRowAfter()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Delete Row">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("deleteRow"),
-                                            }}
-                                            icon={
-                                              <i className="ri-delete-row"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .deleteRow()
-                                                .run()
-                                            }
-                                            disabled={!editor.can().deleteRow()}
-                                          />
-                                        </Tooltip>
-                                      </Flex>
-                                      <Flex
-                                        gap={5}
-                                        align="center"
-                                        wrap="wrap"
-                                        vertical
-                                      >
-                                        <Tooltip title="Delete Table">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("deleteTable"),
-                                            }}
-                                            icon={
-                                              <i className="ri-mark-pen-fill" />
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .deleteTable()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().deleteTable()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Merge Cells">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("mergeCells"),
-                                            }}
-                                            icon={
-                                              <i className="ri-merge-cells-horizontal"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .mergeCells()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().mergeCells()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Split Cell">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("splitCell"),
-                                            }}
-                                            icon={
-                                              <i className="ri-split-cells-horizontal"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .splitCell()
-                                                .run()
-                                            }
-                                            disabled={!editor.can().splitCell()}
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Set Header Column">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle(
-                                                "toggleHeaderColumn"
-                                              ),
-                                            }}
-                                            icon={
-                                              <i className="ri-layout-column-fill"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .toggleHeaderColumn()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().toggleHeaderColumn()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <Tooltip title="Set Header Row">
-                                          <Button
-                                            style={{
-                                              ...buttonStyle("toggleHeaderRow"),
-                                            }}
-                                            icon={
-                                              <i className="ri-layout-row-fill"></i>
-                                            }
-                                            type="text"
-                                            size="middle"
-                                            onClick={() =>
-                                              editor
-                                                .chain()
-                                                .focus()
-                                                .toggleHeaderRow()
-                                                .run()
-                                            }
-                                            disabled={
-                                              !editor.can().toggleHeaderRow()
-                                            }
-                                          />
-                                        </Tooltip>
-                                        <ColorPicker
-                                          size="middle"
-                                          defaultValue="#fff"
-                                          value={currentTableColor}
-                                          open={openTableColor}
-                                          onOpenChange={setOpenTableColor}
-                                          trigger="hover"
-                                          onChange={handleChangeTableColor}
-                                        />
-                                      </Flex>
-                                    </Flex>
-                                  </Card>
-                                )}
-                              ></Dropdown> */}
+                                <DrawerOptionTable
+                                  editor={editor}
+                                  isDrawer={isDrawer}
+                                  openDrawer={openDrawer}
+                                  closeDrawer={closeDrawer}
+                                  buttonStyle={buttonStyle}
+                                  currentTableColor={currentTableColor}
+                                  handleChangeTableColor={
+                                    handleChangeTableColor
+                                  }
+                                />
                               </>
                             )}
                           </>
@@ -577,18 +504,30 @@ const MenuBar = ({
 
         {pageLayoutSetting && (
           <Button
+            style={{
+              fontSize: 16,
+              padding: 0,
+              margin: 0,
+            }}
+            variant={"bordered"}
             isIconOnly
-            aria-label="Setting"
-            size="middle"
-            radius="lg"
-            variant="solid"
-            onPress={handleOpenPageLayoutSetting}
+            size="md"
+            radius="sm"
+            onPress={onOpen}
           >
             <IoSettingsOutline />
           </Button>
         )}
       </div>
-      {openPageLayoutSetting ? <ModalLayoutSetting /> : null}
+      <ModalLayoutSetting
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        onOpen={onOpen}
+        changePageLayout={changePageLayout}
+        handleInputChange={handleInputChange}
+        arrangement={arrangement}
+        valuePageLayout={valuePageLayout}
+      />
     </Card>
   );
 };

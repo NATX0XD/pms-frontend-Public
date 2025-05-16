@@ -1,7 +1,12 @@
+import QueryFilesViews from "@/components/QueryFilesViews";
 import React from "react";
 
 const FormReceipt = () => {
-  return <div>FormReceipt </div>;
+  return (
+    <div>
+      <QueryFilesViews title="ใบเสร็จรับเงิน" />
+    </div>
+  );
 };
 
 export default FormReceipt;

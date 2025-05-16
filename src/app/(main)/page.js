@@ -10,6 +10,7 @@ import {
   Card,
 } from "@heroui/react";
 import { useSession } from "next-auth/react";
+import HomeDashboard from "@/views/home";
 
 const Page = () => {
   const { data: session, status } = useSession();
@@ -19,9 +20,9 @@ const Page = () => {
 
   return (
     <>
-      <Card>Test</Card>
+      {/* <Card>Test</Card> */}
       {/* ตรวจสอบว่ามี session ก่อนเรียกใช้ username */}
-      {session?.user?.username ? (
+      {/* {session?.user?.username ? (
         <div>{session.user.username}</div>
       ) : (
         <div>Not signed in</div>
@@ -34,7 +35,9 @@ const Page = () => {
       <div className="text-error">Error Text</div>
       <div className="bg-warning text-black">Warning Background</div>
       <a className="text-link underline">Link</a>
-      <div className="bg-background">Background ตาม Theme</div>
+      <div className="bg-background">Background ตาม Theme</div> */}
+
+      <HomeDashboard />
     </>
   );
 };
