@@ -26,7 +26,7 @@ import {
 import ModalLayoutSetting from "./ModalLayoutSetting";
 import { debounce } from "lodash";
 import { MdCancel, MdOutlineMoreVert } from "react-icons/md";
-import { FaImage, FaRegSave } from "react-icons/fa";
+import { FaFileImport, FaImage, FaRegSave } from "react-icons/fa";
 import TableOptions from "@/configurations/WordEditorItems/TableOptions";
 import DrawerOptionTable from "./DrawerOptionTable";
 
@@ -104,29 +104,47 @@ const MenuBar = ({
     }
   }, 500);
 
-  const handleChangeFontFormat = debounce((value) => {
-    const level = parseInt(value.slice(1));
-    editor.chain().focus().toggleHeading({ level }).run();
-  }, 100);
+  // const handleChangeFontFormat = debounce((value) => {
+  //   const level = parseInt(value.slice(1));
+  //   editor.chain().focus().toggleHeading({ level }).run();
+  // }, 100);
   const handleChangeSizeFont = debounce((value) => {
     if (value) {
       editor.chain().focus().setFontSize(`${value}px`).run();
     }
   }, 400);
-  const handleChangeFontColor = debounce((value) => {
+  const handleChangeFontFormat = debounce((value) => {
+    let selected = value;
+    if (value && typeof value === "object" && value.size) {
+      selected = Array.from(value)[0];
+    }
+    if (typeof selected === "string" && selected.startsWith("h")) {
+      const level = parseInt(selected.slice(1));
+      editor.chain().focus().toggleHeading({ level }).run();
+    }
+  }, 100);
+  // const handleChangeFontColor = debounce((value) => {
+  //   try {
+  //     if (value && value.toHexString) {
+  //       const hexColor = value.toHexString();
+  //       editor.chain().focus().setColor(hexColor).run();
+  //     }
+  //   } catch (error) {
+  //     //   message.open({
+  //     //     type: "error",
+  //     //     content: "ไม่สามารถเปลี่ยนสีตัวอักษรได้",
+  //     //   });
+  //     console.log("ไม่สามารถเปลี่ยนสีตัวอักษรได้", error);
+  //   }
+  // }, 200);
+  const handleChangeFontColor = (event) => {
     try {
-      if (value && value.toHexString) {
-        const hexColor = value.toHexString();
-        editor.chain().focus().setColor(hexColor).run();
-      }
+      const hexColor = event.target.value;
+      editor.chain().focus().setColor(hexColor).run();
     } catch (error) {
-      //   message.open({
-      //     type: "error",
-      //     content: "ไม่สามารถเปลี่ยนสีตัวอักษรได้",
-      //   });
       console.log("ไม่สามารถเปลี่ยนสีตัวอักษรได้", error);
     }
-  }, 200);
+  };
   // const handleChangeTableColor = debounce((value) => {
   //   try {
   //     if (value && value.toHexString) {
@@ -291,7 +309,7 @@ const MenuBar = ({
               onPress={() => document.getElementById("file-upload").click()}
             >
               <div className="flex flex-row items-center gap-2">
-                {/* <FaRegSave />  */}
+                <FaFileImport />
                 Import File Json
               </div>
             </DropdownItem>
@@ -323,13 +341,14 @@ const MenuBar = ({
         <div className="flex flex-row items-center gap-2">
           {fontSize || fontColor || fontFormat ? (
             <div className="flex flex-row items-center gap-5">
-              {fontFormat && (
+              {/* {fontFormat && (
                 <Tooltip showArrow={true} content="Format Type">
                   <Select
                     classNames={"w-full"}
                     size="small"
                     className="max-w-xs"
                     label="Select Format"
+                    selectionMode="single"
                     placeholder={getActiveHeading() || "Format"}
                     onSelectionChange={handleChangeFontFormat}
                   >
@@ -347,16 +366,18 @@ const MenuBar = ({
                     </SelectItem>
                   </Select>
                 </Tooltip>
-              )}
+              )} */}
               {fontSize && (
                 <Tooltip showArrow={true} content="Font size">
                   <NumberInput
-                    size="small"
+                    radius="md"
+                    size="sm"
                     minValue={1}
                     defaultValue={16}
                     maxValue={106}
                     onValueChange={handleChangeSizeFont}
-                    style={{ width: 20, maxWidth: 55 }}
+                    className="max-w-[80px] "
+                    style={{ width: 30 }}
                   />
                 </Tooltip>
               )}
@@ -382,7 +403,7 @@ const MenuBar = ({
                   type="color"
                   value={currentFontColor}
                   onChange={handleChangeFontColor}
-                  className="w-full h-12 cursor-pointer"
+                  className="max-w-[40px] h-10 cursor-pointer"
                   style={{ border: "none" }}
                 />
               )}
